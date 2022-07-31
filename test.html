@@ -9,9 +9,9 @@ body {
   </div>
 </body>
 <script>
-console.log(12)
+console.log(13)
 navigator.permissions.query({name: "clipboard-read"}).then(result => {
-  navigator.clipboard.readText().then(
+  navigator.clipboard.read().then(
     clipText => document.getElementById("outbox").innerText = clipText
   )
 })
