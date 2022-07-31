@@ -1,0 +1,12 @@
+<a class="image-popup ip1">string</a>
+<img src="miku.jpg" class="image-popup ip1">
+<script>
+window.addEventListener("DOMContentLoaded", () => {
+  let arr_ipBase = Array.from(document.querySelectorAll("a.image-popup"))
+  let arr_ipImage = Array.from(document.querySelectorAll("img.image-popup"))
+  let arr_ipSet = {}
+  for (let i in arr_ipBase) {
+    arr_ipSet[Number(String(arr_ipBase[i].classList).match(/ip\d+/)[0].slice(2))] = []
+  }
+})
+</script>

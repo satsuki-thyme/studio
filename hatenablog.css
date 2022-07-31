@@ -1,0 +1,355 @@
+/* <system section="theme" selected="neutral"> */
+@import "/css/theme/neutral/neutral.css";
+/* </system> */
+/*
+
+  再定義
+
+*/
+.entry .entry-inner .entry-content section::after {
+  clear: both;
+  content: "";
+  display: block;
+}
+.entry .entry-inner .entry-content h1,
+.entry .entry-inner .entry-content h2,
+.entry .entry-inner .entry-content h3,
+.entry .entry-inner .entry-content h4,
+.entry .entry-inner .entry-content h5,
+.entry .entry-inner .entry-content h6 {
+  margin-bottom: 0;
+}
+.entry .entry-inner .entry-content h1 {
+  font-size: 27px;
+}
+.entry .entry-inner .entry-content h1,
+.entry .entry-inner .entry-content h2 {
+  border-bottom: 1px solid #a8a8a8;
+}
+.entry .entry-inner .entry-content h2 {
+  font-size: 25px;
+  border-bottom: 1px solid #a8a8a8;
+}
+.entry .entry-inner .entry-content h1 ~ h2 {
+  font-size: 24px;
+  border-bottom: 0 none;
+}
+.entry .entry-inner .entry-content h3 {
+  font-size: 21px;
+}
+.entry .entry-inner .entry-content h4 {
+  font-size: 18px;
+}
+.entry .entry-inner .entry-content h5 {
+  font-size: 16px;
+  color: #555;
+}
+.entry .entry-inner .entry-content h6 {
+  font-size: 16px;
+  color: #777;
+}
+.entry .entry-inner .entry-content h1:first-child,
+.entry .entry-inner .entry-content h2:first-child,
+.entry .entry-inner .entry-content h3:first-child,
+.entry .entry-inner .entry-content h4:first-child,
+.entry .entry-inner .entry-content h5:first-child,
+.entry .entry-inner .entry-content h6:first-child {
+  margin-top: 26px;
+}
+.entry .entry-inner .entry-content p,
+.entry .entry-inner .entry-content ol,
+.entry .entry-inner .entry-content ul,
+.entry .entry-inner .entry-content pre,
+.entry .entry-inner .entry-content blockquote,
+.entry .entry-inner .entry-content table {
+  margin-top: 22px;
+  margin-bottom: 0;
+}
+.entry .entry-inner .entry-content p {
+  text-align: justify;
+  text-justify: inter-ideograph;
+}
+.entry .entry-inner .entry-content code {
+    font-family: Consolas, 'Courier New', Courier, monospace;
+}
+.entry .entry-inner .entry-content pre {
+  padding-left: 13px;
+}
+.entry .entry-inner .entry-content pre code {
+  line-height: 1.8em;
+}
+.entry .entry-inner .entry-content ol,
+.entry .entry-inner .entry-content ul,
+.entry .entry-inner .entry-content table {
+  font-size: 18px;
+  color: #454545;
+}
+.entry .entry-inner .entry-content blockquote p {
+  margin-top: 0;
+  margin-bottom: 0;
+}
+.entry .entry-inner .entry-content blockquote p + p {
+  margin-top: 19px;
+}
+.entry .entry-inner .entry-content img {
+  max-width: 100%;
+}
+.entry .entry-inner .entry-content hr {
+  margin-top: 30px;
+  margin-bottom: 30px;
+  border-top: 5px solid #eee;
+}
+.entry .entry-inner .entry-content li > ol,
+.entry .entry-inner .entry-content li > ul {
+  margin-top: 0;
+}
+.entry .entry-inner .entry-content ol + li,
+.entry .entry-inner .entry-content ul + li {
+  margin-top: 13px;
+}
+.entry .entry-inner .entry-content p + ol,
+.entry .entry-inner .entry-content p + ul {
+  padding-left: 15px;
+}
+.entry .entry-inner .entry-content h1 + p,
+.entry .entry-inner .entry-content h1 + ol,
+.entry .entry-inner .entry-content h1 + ul,
+.entry .entry-inner .entry-content h1 + pre,
+.entry .entry-inner .entry-content h1 + blockquote,
+.entry .entry-inner .entry-content h1 + table,
+.entry .entry-inner .entry-content h2 + p,
+.entry .entry-inner .entry-content h2 + ol,
+.entry .entry-inner .entry-content h2 + ul,
+.entry .entry-inner .entry-content h2 + pre,
+.entry .entry-inner .entry-content h2 + blockquote,
+.entry .entry-inner .entry-content h2 + table,
+.entry .entry-inner .entry-content h3 + p,
+.entry .entry-inner .entry-content h3 + ol,
+.entry .entry-inner .entry-content h3 + ul,
+.entry .entry-inner .entry-content h3 + pre,
+.entry .entry-inner .entry-content h3 + blockquote,
+.entry .entry-inner .entry-content h3 + table,
+.entry .entry-inner .entry-content h4 + p,
+.entry .entry-inner .entry-content h4 + ol,
+.entry .entry-inner .entry-content h4 + ul,
+.entry .entry-inner .entry-content h4 + pre,
+.entry .entry-inner .entry-content h4 + blockquote,
+.entry .entry-inner .entry-content h4 + table,
+.entry .entry-inner .entry-content h5 + p,
+.entry .entry-inner .entry-content h5 + ol,
+.entry .entry-inner .entry-content h5 + ul,
+.entry .entry-inner .entry-content h5 + pre,
+.entry .entry-inner .entry-content h5 + blockquote,
+.entry .entry-inner .entry-content h5 + table,
+.entry .entry-inner .entry-content h6 + p,
+.entry .entry-inner .entry-content h6 + ol,
+.entry .entry-inner .entry-content h6 + ul,
+.entry .entry-inner .entry-content h6 + pre,
+.entry .entry-inner .entry-content h6 + blockquote,
+.entry .entry-inner .entry-content h6 + table {
+    margin-top: 16px;
+}
+.entry .entry-inner .entry-content a:not(.keyword),
+.entry .entry-inner .entry-content a:not(.keyword):visited,
+.entry .entry-inner .entry-content a:not(.keyword):hover {
+  color: #0c6cac;
+}
+.entry .entry-inner .entry-content p .keyword {
+  border-bottom-style: dashed;
+}
+.hatena-module .hatena-module-body .urllist-item .urllist-item-inner .urllist-title-link,
+.hatena-module .hatena-urllist .urllist-item .urllist-item-inner .urllist-title-link {
+  font-size: 17px;
+}
+.hatena-module .hatena-module-body .urllist-item .urllist-item-inner .urllist-entry-body,
+.hatena-module .hatena-urllist .urllist-item .urllist-item-inner .urllist-entry-body {
+  color: #a8a8a8;
+}
+/*
+
+  デザインの追加
+
+*/
+/* フロートの簡略設定 */
+.entry .entry-inner .entry-content p.float-left,
+.entry .entry-inner .entry-content p.float-right {
+  width: 40%;
+  margin-top: 0;
+  margin-bottom: 0;
+  line-height: 0;
+}
+.entry .entry-inner .entry-content p.float-left {
+  float: left;
+  margin-right: 15px;
+}
+.entry .entry-inner .entry-content p.float-right {
+  float: right;
+  margin-left: 15px;
+}
+.entry .entry-inner .entry-content p.float-left.narrow,
+.entry .entry-inner .entry-content p.float-right.narrow {
+  width: 25%;
+}
+.entry .entry-inner .entry-content p + p.float-left,
+.entry .entry-inner .entry-content h1 + p.float-left,
+.entry .entry-inner .entry-content h2 + p.float-left,
+.entry .entry-inner .entry-content h3 + p.float-left,
+.entry .entry-inner .entry-content h4 + p.float-left,
+.entry .entry-inner .entry-content h5 + p.float-left,
+.entry .entry-inner .entry-content h6 + p.float-left,
+.entry .entry-inner .entry-content p + p.float-right,
+.entry .entry-inner .entry-content h1 + p.float-right,
+.entry .entry-inner .entry-content h2 + p.float-right,
+.entry .entry-inner .entry-content h3 + p.float-right,
+.entry .entry-inner .entry-content h4 + p.float-right,
+.entry .entry-inner .entry-content h5 + p.float-right,
+.entry .entry-inner .entry-content h6 + p.float-right {
+  margin-top: 26px;
+}
+.entry .entry-inner .entry-content p.float-left img,
+.entry .entry-inner .entry-content p.float-right img {
+  width: 100%;
+}
+.entry .entry-inner .entry-content p.float-left ~ h1,
+.entry .entry-inner .entry-content p.float-left ~ h2,
+.entry .entry-inner .entry-content p.float-left ~ h3,
+.entry .entry-inner .entry-content p.float-left ~ h4,
+.entry .entry-inner .entry-content p.float-left ~ h5,
+.entry .entry-inner .entry-content p.float-left ~ h6,
+.entry .entry-inner .entry-content p.float-right ~ h1,
+.entry .entry-inner .entry-content p.float-right ~ h2,
+.entry .entry-inner .entry-content p.float-right ~ h3,
+.entry .entry-inner .entry-content p.float-right ~ h4,
+.entry .entry-inner .entry-content p.float-right ~ h5,
+.entry .entry-inner .entry-content p.float-right ~ h6 {
+  clear: both;
+}
+/* 「編集見たまま」タブの「見たまま」など */
+.entry .entry-inner .entry-content .s1 {
+  font-size: 0.73em;
+}
+/* もっと小さい（見え方の目視チェックしてない） */
+.entry .entry-inner .entry-content .s2 {
+  font-size: 0.55em;
+}
+/* もっともっと小さい（見え方の目視チェックしてない） */
+.entry .entry-inner .entry-content .s3 {
+  font-size: 0.37em;
+}
+
+/*!
+  Theme: GitHub Dark
+  Description: Dark theme as seen on github.com
+  Author: github.com
+  Maintainer: @Hirse
+  Updated: 2021-05-15
+
+  Outdated base version: https://github.com/primer/github-syntax-dark
+  Current colors taken from GitHub's CSS
+*/
+
+.hljs {
+  color: #c9d1d9;
+  background: #0d1117;
+}
+
+.hljs-doctag,
+.hljs-keyword,
+.hljs-meta .hljs-keyword,
+.hljs-template-tag,
+.hljs-template-variable,
+.hljs-type,
+.hljs-variable.language_ {
+  /* prettylights-syntax-keyword */
+  color: #ff7b72;
+}
+
+.hljs-title,
+.hljs-title.class_,
+.hljs-title.class_.inherited__,
+.hljs-title.function_ {
+  /* prettylights-syntax-entity */
+  color: #d2a8ff;
+}
+
+.hljs-attr,
+.hljs-attribute,
+.hljs-literal,
+.hljs-meta,
+.hljs-number,
+.hljs-operator,
+.hljs-variable,
+.hljs-selector-attr,
+.hljs-selector-class,
+.hljs-selector-id {
+  /* prettylights-syntax-constant */
+  color: #79c0ff;
+}
+
+.hljs-regexp,
+.hljs-string,
+.hljs-meta .hljs-string {
+  /* prettylights-syntax-string */
+  color: #a5d6ff;
+}
+
+.hljs-built_in,
+.hljs-symbol {
+  /* prettylights-syntax-variable */
+  color: #ffa657;
+}
+
+.hljs-comment,
+.hljs-code,
+.hljs-formula {
+  /* prettylights-syntax-comment */
+  color: #8b949e;
+}
+
+.hljs-name,
+.hljs-quote,
+.hljs-selector-tag,
+.hljs-selector-pseudo {
+  /* prettylights-syntax-entity-tag */
+  color: #7ee787;
+}
+
+.hljs-subst {
+  /* prettylights-syntax-storage-modifier-import */
+  color: #c9d1d9;
+}
+
+.hljs-section {
+  /* prettylights-syntax-markup-heading */
+  color: #1f6feb;
+  font-weight: bold;
+}
+
+.hljs-bullet {
+  /* prettylights-syntax-markup-list */
+  color: #f2cc60;
+}
+
+.hljs-emphasis {
+  /* prettylights-syntax-markup-italic */
+  color: #c9d1d9;
+  font-style: italic;
+}
+
+.hljs-strong {
+  /* prettylights-syntax-markup-bold */
+  color: #c9d1d9;
+  font-weight: bold;
+}
+
+.hljs-addition {
+  /* prettylights-syntax-markup-inserted */
+  color: #aff5b4;
+  background-color: #033a16;
+}
+
+.hljs-deletion {
+  /* prettylights-syntax-markup-deleted */
+  color: #ffdcd7;
+  background-color: #67060c;
+}

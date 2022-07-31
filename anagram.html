@@ -1,0 +1,514 @@
+<html lang="ja-JP">
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>アナグラム・メーカー</title>
+  <meta name="keywords" content="アナグラム, メーカー, 絵文字">
+  <meta name="description" content="入力した語のアナグラムを生成するツールです。一部の絵文字にも対応しています。">
+  <meta property="og:url" content="https://etc.satsuki.me/anagram.html">
+  <meta property="og:title" content="etc">
+  <meta property="og:description" content="入力した語のアナグラムを生成するツールです。一部の絵文字にも対応しています。">
+  <meta property="og:image" content="https://etc.satsuki.me/attachment/common/thyme-fg-white-bg-green-512s.png">
+  <meta property="og:image:width" content="512">
+  <meta property="og:image:height" content="512">
+  <meta property="og:site_name" content="etc">
+  <meta property="og:type" content="webpage">
+  <meta property="og:locale" content="ja_JP">
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:site" content="@SatsukiThyme">
+  <meta name="twitter:image:src" content="https://etc.satsuki.me/attachment/common/thyme-fg-white-bg-green-512s.png">
+  <meta name="msapplication-square70x70logo" content="https://etc.satsuki.me/attachment/common/thyme-fg-white-bg-green-70s.png">
+  <meta name="msapplication-square150x150logo" content="https://etc.satsuki.me/attachment/common/thyme-fg-white-bg-green-150s.png">
+  <meta name="msapplication-wide310x150logo" content="https://etc.satsuki.me/attachment/common/thyme-fg-white-bg-green-310x150.png">
+  <meta name="msapplication-square310x310logo" content="https://etc.satsuki.me/attachment/common/thyme-fg-white-bg-green-310s.png">
+  <meta name="msapplication-TileColor" content="#62a433">
+  <link rel="stylesheet" href="/3rd-party-lib/normalize.css">
+  <link rel="stylesheet" href="https://unpkg.com/purecss@2.1.0/build/pure-min.css" integrity="sha384-yHIFVG6ClnONEA5yB5DJXfW2/KC173DIQrYoZMEtBvGzmf0PKiGyNEqe9N6BNDBH" crossorigin="anonymous">
+  <style>
+  #container {
+    width: 93%;
+    max-width: 600px;
+    margin-right: auto;
+    margin-left: auto;
+    padding: 5px;
+  }
+  header,
+  footer {
+    text-align: center;
+  }
+  header {
+    padding-top: 10px;
+  }
+  footer {
+    padding-top: 20px;
+  }
+  h1 {
+    margin: 0;
+    font-size: 23px;
+  }
+  h2.label {
+    margin: 0;
+    font-size: 100%;
+    font-weight: normal;
+    text-align: left;
+  }
+  #input,
+  #output {
+    width: 100%;
+    height: 150px;
+  }
+  #input::placeholder,
+  #output.gray-out {
+    color: #ccc;
+  }
+  section + section {
+    margin-top: 20px;
+  }
+  section {
+    text-align: center;
+  }
+  #output {
+    padding: 0.5em 0.6em;
+    display: inline-block;
+    border: 1px solid #ccc;
+    box-shadow: inset 0 1px 3px #ddd;
+    border-radius: 4px;
+    vertical-align: middle;
+    box-sizing: border-box;
+    text-align: left;
+    overflow-y: scroll;
+  }
+  #execute,
+  #copy {
+    width: 60%;
+    line-height: 1.18;
+  }
+</style>
+<div id="container">
+  <header>
+    <h1>アナグラム・メーカー</h1>
+  </header>
+  <main class="pure-form">
+    <section>
+      <h2 class="label">入力</h2>
+      <textarea id="input">あなろぐ</textarea>
+    </section>
+    <section>
+      <input type="button" id="execute" value="反転" class="pure-button pure-button-primary">
+    </section>
+    <section>
+      <h2 class="label">結果</h2>
+      <div id="output" class="gray-out"></div>
+    </section>
+    <section>
+      <input type="button" id="copy" value="コピー" class="pure-button pure-button-primary">
+    </section>
+  </main>
+  <footer>
+    &copy;Satsuki Thyme
+  </footer>
+</div>
+<script>
+let nod_input = document.querySelector("#input")
+let nod_output = document.querySelector("#output")
+let nod_execute = document.querySelector("#execute")
+let nod_copy = document.querySelector("#copy")
+let output = ""
+let exception = []
+let arr_rlt = [
+  ["うぁ", "w", "a"],
+  ["うぃ", "w", "i"],
+  ["うぇ", "w", "e"],
+  ["うぉ", "w", "o"],
+  ["くぁ", "kw", "a"],
+  ["くぃ", "kw", "i"],
+  ["くぇ", "kw", "e"],
+  ["くぉ", "kw", "o"],
+  ["すぁ", "sw", "a"],
+  ["すぃ", "sw", "i"],
+  ["すぇ", "sw", "e"],
+  ["すぉ", "sw", "o"],
+  ["つぁ", "tw", "a"],
+  ["つぃ", "tw", "i"],
+  ["つぇ", "tw", "e"],
+  ["つぉ", "tw", "o"],
+  ["ぬぁ", "nw", "a"],
+  ["ぬぃ", "nw", "i"],
+  ["ぬぇ", "nw", "e"],
+  ["ぬぉ", "nw", "o"],
+  ["ふぁ", "hw", "a"],
+  ["ふぃ", "hw", "i"],
+  ["ふぇ", "hw", "e"],
+  ["ふぉ", "hw", "o"],
+  ["むぁ", "mw", "a"],
+  ["むぃ", "mw", "i"],
+  ["むぇ", "mw", "e"],
+  ["むぉ", "mw", "o"],
+  ["ゆぁ", "yw", "a"],
+  ["ゆぃ", "yw", "i"],
+  ["ゆぇ", "yw", "e"],
+  ["ゆぉ", "yw", "o"],
+  ["るぁ", "rw", "a"],
+  ["るぃ", "rw", "i"],
+  ["るぇ", "rw", "e"],
+  ["るぉ", "rw", "o"],
+  ["きゃ", "ky", "a"],
+  ["きゅ", "ky", "u"],
+  ["きょ", "ky", "o"],
+  ["しゃ", "sy", "a"],
+  ["しゅ", "sy", "u"],
+  ["しょ", "sy", "o"],
+  ["ちゃ", "ty", "a"],
+  ["ちゅ", "ty", "u"],
+  ["ちょ", "ty", "o"],
+  ["にゃ", "ny", "a"],
+  ["にゅ", "ny", "u"],
+  ["にょ", "ny", "o"],
+  ["ひゃ", "hy", "a"],
+  ["ひゅ", "hy", "u"],
+  ["ひょ", "hy", "o"],
+  ["みゃ", "my", "a"],
+  ["みゅ", "my", "u"],
+  ["みょ", "my", "o"],
+  ["りゃ", "ry", "a"],
+  ["りゅ", "ry", "u"],
+  ["りょ", "ry", "o"],
+  ["ゔぁ", "vw", "a"],
+  ["ゔぃ", "vw", "i"],
+  ["ゔぇ", "vw", "e"],
+  ["ゔぉ", "vw", "o"],
+  ["ぐぁ", "gw", "a"],
+  ["ぐぃ", "gw", "i"],
+  ["ぐぇ", "gw", "e"],
+  ["ぐぉ", "gw", "o"],
+  ["ずぁ", "zw", "a"],
+  ["ずぃ", "zw", "i"],
+  ["ずぇ", "zw", "e"],
+  ["ずぉ", "zw", "o"],
+  ["づぁ", "dw", "a"],
+  ["づぃ", "dw", "i"],
+  ["づぇ", "dw", "e"],
+  ["づぉ", "dw", "o"],
+  ["ぶぁ", "bw", "a"],
+  ["ぶぃ", "bw", "i"],
+  ["ぶぇ", "bw", "e"],
+  ["ぶぉ", "bw", "o"],
+  ["ぎゃ", "gy", "a"],
+  ["ぎゅ", "gy", "u"],
+  ["ぎょ", "gy", "o"],
+  ["じゃ", "zy", "a"],
+  ["じゅ", "zy", "u"],
+  ["じょ", "zy", "o"],
+  ["ぢゃ", "dy", "a"],
+  ["ぢゅ", "dy", "u"],
+  ["ぢょ", "dy", "o"],
+  ["びゃ", "by", "a"],
+  ["びゅ", "by", "u"],
+  ["びょ", "by", "o"],
+  ["ぴゃ", "py", "a"],
+  ["ぴゅ", "py", "u"],
+  ["ぴょ", "py", "o"],
+  ["あ", "", "a"],
+  ["い", "", "i"],
+  ["う", "", "u"],
+  ["え", "", "e"],
+  ["お", "", "o"],
+  ["か", "k", "a"],
+  ["き", "k", "i"],
+  ["く", "k", "u"],
+  ["け", "k", "e"],
+  ["こ", "k", "o"],
+  ["さ", "s", "a"],
+  ["し", "s", "i"],
+  ["す", "s", "u"],
+  ["せ", "s", "e"],
+  ["そ", "s", "o"],
+  ["た", "t", "a"],
+  ["ち", "t", "i"],
+  ["つ", "t", "u"],
+  ["て", "t", "e"],
+  ["と", "t", "o"],
+  ["な", "n", "a"],
+  ["に", "n", "i"],
+  ["ぬ", "n", "u"],
+  ["ね", "n", "e"],
+  ["の", "n", "o"],
+  ["は", "h", "a"],
+  ["ひ", "h", "i"],
+  ["ふ", "h", "u"],
+  ["へ", "h", "e"],
+  ["ほ", "h", "o"],
+  ["ま", "m", "a"],
+  ["み", "m", "i"],
+  ["む", "m", "u"],
+  ["め", "m", "e"],
+  ["も", "m", "o"],
+  ["や", "y", "a"],
+  ["ゐ", "y", "i"],
+  ["ゆ", "y", "u"],
+  ["ゑ", "y", "e"],
+  ["よ", "y", "o"],
+  ["ら", "r", "a"],
+  ["り", "r", "i"],
+  ["る", "r", "u"],
+  ["れ", "r", "e"],
+  ["ろ", "r", "o"],
+  ["わ", "w", "a"],
+  ["を", "w", "o"],
+  ["ん", "", "n"],
+  ["が", "g", "a"],
+  ["ぎ", "g", "i"],
+  ["ぐ", "g", "u"],
+  ["げ", "g", "e"],
+  ["ご", "g", "o"],
+  ["ざ", "z", "a"],
+  ["じ", "z", "i"],
+  ["ず", "z", "u"],
+  ["ぜ", "z", "e"],
+  ["ぞ", "z", "o"],
+  ["だ", "d", "a"],
+  ["ぢ", "d", "i"],
+  ["づ", "d", "u"],
+  ["で", "d", "e"],
+  ["ど", "d", "o"],
+  ["ば", "b", "a"],
+  ["び", "b", "i"],
+  ["ぶ", "b", "u"],
+  ["べ", "b", "e"],
+  ["ぼ", "b", "o"],
+  ["ぱ", "p", "a"],
+  ["ぴ", "p", "i"],
+  ["ぷ", "p", "u"],
+  ["ぺ", "p", "e"],
+  ["ぽ", "p", "o"],
+  ["っ", "", "ltu"],
+  ["ー", "", "-"]
+]
+let arr_rltRev = [
+  ["wi", "うぃ"],
+  ["we", "うぇ"],
+  ["wo", "うぉ"],
+  ["kwa", "くぁ"],
+  ["kwi", "くぃ"],
+  ["kwe", "くぇ"],
+  ["kwo", "くぉ"],
+  ["swa", "すぁ"],
+  ["swi", "すぃ"],
+  ["swe", "すぇ"],
+  ["swo", "すぉ"],
+  ["twa", "つぁ"],
+  ["twi", "つぃ"],
+  ["twe", "つぇ"],
+  ["two", "つぉ"],
+  ["nwa", "ぬぁ"],
+  ["nwi", "ぬぃ"],
+  ["nwe", "ぬぇ"],
+  ["nwo", "ぬぉ"],
+  ["hwa", "ふぁ"],
+  ["hwi", "ふぃ"],
+  ["hwe", "ふぇ"],
+  ["hwo", "ふぉ"],
+  ["mwa", "むぁ"],
+  ["mwi", "むぃ"],
+  ["mwe", "むぇ"],
+  ["mwo", "むぉ"],
+  ["ywa", "ゆぁ"],
+  ["ywi", "ゆぃ"],
+  ["ywe", "ゆぇ"],
+  ["ywo", "ゆぉ"],
+  ["rwa", "るぁ"],
+  ["rwi", "るぃ"],
+  ["rwe", "るぇ"],
+  ["rwo", "るぉ"],
+  ["kya", "きゃ"],
+  ["kyu", "きゅ"],
+  ["kyo", "きょ"],
+  ["sya", "しゃ"],
+  ["syu", "しゅ"],
+  ["syo", "しょ"],
+  ["tya", "ちゃ"],
+  ["tyu", "ちゅ"],
+  ["tyo", "ちょ"],
+  ["nya", "にゃ"],
+  ["nyu", "にゅ"],
+  ["nyo", "にょ"],
+  ["hya", "ひゃ"],
+  ["hyu", "ひゅ"],
+  ["hyo", "ひょ"],
+  ["mya", "みゃ"],
+  ["myu", "みゅ"],
+  ["myo", "みょ"],
+  ["rya", "りゃ"],
+  ["ryu", "りゅ"],
+  ["ryo", "りょ"],
+  ["vwa", "ゔぁ"],
+  ["vwi", "ゔぃ"],
+  ["vwe", "ゔぇ"],
+  ["vwo", "ゔぉ"],
+  ["gwa", "ぐぁ"],
+  ["gwi", "ぐぃ"],
+  ["gwe", "ぐぇ"],
+  ["gwo", "ぐぉ"],
+  ["zwa", "ずぁ"],
+  ["zwi", "ずぃ"],
+  ["zwe", "ずぇ"],
+  ["zwo", "ずぉ"],
+  ["dwa", "づぁ"],
+  ["dwi", "づぃ"],
+  ["dwe", "づぇ"],
+  ["dwo", "づぉ"],
+  ["bwa", "ぶぁ"],
+  ["bwi", "ぶぃ"],
+  ["bwe", "ぶぇ"],
+  ["bwo", "ぶぉ"],
+  ["gya", "ぎゃ"],
+  ["gyu", "ぎゅ"],
+  ["gyo", "ぎょ"],
+  ["zya", "じゃ"],
+  ["zyu", "じゅ"],
+  ["zyo", "じょ"],
+  ["dya", "ぢゃ"],
+  ["dyu", "ぢゅ"],
+  ["dyo", "ぢょ"],
+  ["bya", "びゃ"],
+  ["byu", "びゅ"],
+  ["byo", "びょ"],
+  ["pya", "ぴゃ"],
+  ["pyu", "ぴゅ"],
+  ["pyo", "ぴょ"],
+  ["a", "あ"],
+  ["i", "い"],
+  ["u", "う"],
+  ["e", "え"],
+  ["o", "お"],
+  ["ka", "か"],
+  ["ki", "き"],
+  ["ku", "く"],
+  ["ke", "け"],
+  ["ko", "こ"],
+  ["sa", "さ"],
+  ["si", "し"],
+  ["su", "す"],
+  ["se", "せ"],
+  ["so", "そ"],
+  ["ta", "た"],
+  ["ti", "ち"],
+  ["tu", "つ"],
+  ["te", "て"],
+  ["to", "と"],
+  ["na", "な"],
+  ["ni", "に"],
+  ["nu", "ぬ"],
+  ["ne", "ね"],
+  ["no", "の"],
+  ["ha", "は"],
+  ["hi", "ひ"],
+  ["hu", "ふ"],
+  ["he", "へ"],
+  ["ho", "ほ"],
+  ["ma", "ま"],
+  ["mi", "み"],
+  ["mu", "む"],
+  ["me", "め"],
+  ["mo", "も"],
+  ["ya", "や"],
+  ["yi", "ゐ"],
+  ["yu", "ゆ"],
+  ["ye", "ゑ"],
+  ["yo", "よ"],
+  ["ra", "ら"],
+  ["ri", "り"],
+  ["ru", "る"],
+  ["re", "れ"],
+  ["ro", "ろ"],
+  ["wa", "わ"],
+  ["wo", "を"],
+  ["n", "ん"],
+  ["ga", "が"],
+  ["gi", "ぎ"],
+  ["gu", "ぐ"],
+  ["ge", "げ"],
+  ["go", "ご"],
+  ["za", "ざ"],
+  ["zi", "じ"],
+  ["zu", "ず"],
+  ["ze", "ぜ"],
+  ["zo", "ぞ"],
+  ["da", "だ"],
+  ["di", "ぢ"],
+  ["du", "づ"],
+  ["de", "で"],
+  ["do", "ど"],
+  ["ba", "ば"],
+  ["bi", "び"],
+  ["bu", "ぶ"],
+  ["be", "べ"],
+  ["bo", "ぼ"],
+  ["pa", "ぱ"],
+  ["pi", "ぴ"],
+  ["pu", "ぷ"],
+  ["pe", "ぺ"],
+  ["po", "ぽ"],
+  ["ltu", "っ"],
+  ["-", "ー"]
+]
+nod_execute.onclick = () => {
+  output = ""
+  procSplit(nod_input.value).then(async arr_spl => {
+    procAnagram(arr_spl).then(async arr_set => {
+      let arr_anag = []
+      let j = 0
+      for (let i in arr_spl) {
+        arr_anag.push(arr_set[0].sort()[i][1] + arr_set[1].sort()[i][1])
+      }
+      return await arr_anag
+    }).then(async arr_anag => {
+      for (let i in arr_anag) {
+        for (let j in arr_rltRev) {
+          if (arr_anag[i] === arr_rltRev[j][0]) {
+            output += arr_rltRev[j][1]
+          }
+        }
+      }
+      return await output
+    }).then(output => {
+      nod_output.innerHTML = output
+      nod_output.classList.remove("gray-out")
+    })
+  })
+}
+nod_copy.onclick = () => {
+  navigator.clipboard.writeText(output).then(copySuccess, copyFail)
+  function copySuccess() {
+    alert("クリップボードにコピーしました")
+  }
+  function copyFail() {
+    alert("クリップボードへのコピーに失敗しました")
+  }
+}
+async function procSplit(r) {
+  return await Array.from(r)
+}
+async function procAnagram(arr_spl) {
+  let arr_consonant = []
+  let arr_vowel = []
+  let arr_set = []
+  for (let i in arr_spl) {
+    for (let j in arr_rlt) {
+      if (arr_spl[i] === arr_rlt[j][0]) {
+        arr_consonant.push([(Math.random() + "000000000000000000").slice(0, 18), arr_rlt[j][1]])
+        arr_vowel.push([(Math.random() + "000000000000000000").slice(0, 18), arr_rlt[j][2]])
+        console.log([arr_consonant, arr_vowel])
+      }
+    }
+  }
+  return await [arr_consonant, arr_vowel]
+}
+async function procException(arr_spl) {
+  for (let i in arr_spl) {
+    if (arr_spl[i].includes(/[んーっ]/) === true {
+
+    }
+  }
+}
+</script>
+</html>

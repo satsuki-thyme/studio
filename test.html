@@ -1,0 +1,16 @@
+<style>
+body {
+  color: #f1eee9;
+  background-color: #1e1f1c;
+}
+</style>
+<script>
+navigator.permissions.query({name: "clipboard-read"})
+.then(r => {
+  console.log(r)
+})
+</script>
+<body>
+  <div id="text">
+  </div>
+</body>

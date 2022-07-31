@@ -1,0 +1,11 @@
+<html>
+<script>
+let arr_search = location.search.slice(1).split("&")
+let arr_param = {}
+for (let i = 0; i < arr_search.length; i++) {
+  let w = arr_search[i].split("=")
+  arr_param[w[0]] = w[1]
+}
+console.log(arr_param)
+</script>
+</html>
