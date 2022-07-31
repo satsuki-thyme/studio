@@ -9,7 +9,7 @@ body {
   </div>
 </body>
 <script>
-console.log(7)
+console.log(8)
 navigator.permissions.query({name: "clipboard-read"}).then(r => {
   if (r.state == "granted" || r.state == "prompt") {
     navigator.clipboard.read().then(r1 => {
@@ -23,7 +23,7 @@ navigator.permissions.query({name: "clipboard-read"}).then(r => {
           textElem.innerHTML = r1[i].getAs("html")
         }
         else {
-          console.log(r1[i].type)
+          console.log(r1.type)
           alert("xxx")
         }
       }
