@@ -9,11 +9,11 @@ body {
   </div>
 </body>
 <script>
-console.log(1)
+console.log(2)
 navigator.permissions.query({name: "clipboard-read"}).then(r => {
   if (r.state == "granted" || r.state == "prompt") {
     navigator.clipboard.read().then(r1 => {
-      console.log(r1)
+      console.log(r1.items)
       for (let i=0; i<r1.items.length; i++) {
         if (r1.items[i].type == "text/plain") {
           textElem.innerText = r1.items[i].getAs("text/plain")
