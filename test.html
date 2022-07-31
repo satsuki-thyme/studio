@@ -9,13 +9,13 @@ body {
   </div>
 </body>
 <script>
-console.log(6)
+console.log(7)
 navigator.permissions.query({name: "clipboard-read"}).then(r => {
   if (r.state == "granted" || r.state == "prompt") {
     navigator.clipboard.read().then(r1 => {
       console.log(r1)
-      console.log(r1[0])
-      for (let i=0; i<r1.length; i++) {
+      console.log(r1)
+      for (let i in r1) {
         if (r1[i].type == "text/plain") {
           textElem.innerText = r1[i].getAs("text/plain")
         }
@@ -23,6 +23,7 @@ navigator.permissions.query({name: "clipboard-read"}).then(r => {
           textElem.innerHTML = r1[i].getAs("html")
         }
         else {
+          console.log(r1[i].type)
           alert("xxx")
         }
       }
