@@ -9,26 +9,25 @@ body {
   </div>
 </body>
 <script>
-console.log(10)
-navigator.permissions.query({name: "clipboard-read"}).then(r => {
-  if (r.state == "granted" || r.state == "prompt") {
-    navigator.clipboard.read().then(r1 => {
-      console.log(r1)
-      console.log(r1.clipboardItem[0].types)
-      for (let i in r1) {
-        if (r1[i].clipboardItem.types == "text/plain") {
-          textElem.innerText = r1[i].clipboardItem.getAs("text/plain")
-        }
-        else if (r1[i].clipboardItem.types == "text/html") {
-          textElem.innerHTML = r1[i].clipboardItem.getAs("html")
-        }
-        else {
-          console.log(r1[i].clipboardItem.type)
-          alert("xxx")
+console.log(11)
+// まず、Permissions API を使って、
+// "clipboard-read" 機能を使えるかどうか確認します。
+
+navigator.permissions.query({name: "clipboard-read"}).then(result => {
+  // クリップボードの読み取りが許可されているか、またはプロンプトによって
+  // ユーザーがそれを許可する場合、処理を続行します。
+
+  if (result.state == "granted" || result.state == "prompt") {
+    navigator.clipboard.read().then(data => {
+      for (let i=0; i<data.items.length; i++) {
+        if (data.items[i].type != "text/plain") {
+          alert("クリップボードの内容がテキストでないため、読み込めません。");
+        } else {
+          textElem.innerText = data.items[i].getAs("text/plain");
         }
       }
-    })
+    });
   }
-})
+});
 </script>
     
