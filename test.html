@@ -4,13 +4,29 @@ body {
   background-color: #1e1f1c;
 }
 </style>
-<script>
-navigator.permissions.query({name: "clipboard-read"})
-.then(r => {
-  console.log(r)
-})
-</script>
 <body>
-  <div id="text">
+  <div id="textElm">
   </div>
 </body>
+<script>
+console.log(1)
+navigator.permissions.query({name: "clipboard-read"}).then(r => {
+  if (r.state == "granted" || r.state == "prompt") {
+    navigator.clipboard.read().then(r1 => {
+      console.log(r1)
+      for (let i=0; i<r1.items.length; i++) {
+        if (r1.items[i].type == "text/plain") {
+          textElem.innerText = r1.items[i].getAs("text/plain")
+        }
+        else if (r1.items[i].type == "html") {
+          textElem.innerHTML = r1.items[i].getAs("html")
+        }
+        else {
+          alert("xxx")
+        }
+      }
+    })
+  }
+})
+</script>
+    
