@@ -9,11 +9,11 @@ body {
   </div>
 </body>
 <script>
-console.log(17)
+console.log(18)
 navigator.permissions.query({name: "clipboard-read"}).then(() => {
   navigator.clipboard.read().then(async r => {
     for (let i in r) {
-      text.innerHTML = await r[i].getType("text/html")
+      text.innerHTML = await (await r[i].getType("text/html")).text()
     }
   })
 })
