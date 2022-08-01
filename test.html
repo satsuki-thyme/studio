@@ -9,15 +9,15 @@ body {
   </div>
 </body>
 <script>
-console.log(22)
+console.log(23)
 navigator.permissions.query({name: "clipboard-read"}).then(r => {
   console.log(r)
   if (r.state == "granted" || r.state == "prompt") {
     navigator.clipboard.read().then(async r => {
-      console.log(r)
-      console.log(r.items)
-      console.log(r.type)
-      console.log(r.getType("text/plain"))
+      console.log(r[0])
+      console.log(r[0].items)
+      console.log(r[0].type)
+      console.log(r[0].getType("text/plain"))
       if (r) {
 
       }
