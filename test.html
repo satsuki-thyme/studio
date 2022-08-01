@@ -9,17 +9,14 @@ body {
   </div>
 </body>
 <script>
-console.log(30)
+console.log(31)
 navigator.permissions.query({name: "clipboard-read"}).then(r => {
-  console.log(r)
   if (r.state == "granted" || r.state == "prompt") {
     navigator.clipboard.read().then(async r => {
-      console.log(r[0])
-      console.log(r[0].types)
-      console.log(r[0].getType("text/plain"))
       if (r[0].types.indexOf("text/html") > -1) {
-        let w = await (await r[0].getType("text/html")).text()
-        console.log(w)
+        (await r[0].getType("text/html")).text().then(r => {
+          text.innerHTML = r.replace(/<ruby>.*?<\/ruby>/g, "")
+        })
       }
     })
   }
