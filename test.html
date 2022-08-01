@@ -9,7 +9,7 @@ body {
   </div>
 </body>
 <script>
-console.log(27)
+console.log(28)
 navigator.permissions.query({name: "clipboard-read"}).then(r => {
   console.log(r)
   if (r.state == "granted" || r.state == "prompt") {
@@ -19,7 +19,7 @@ navigator.permissions.query({name: "clipboard-read"}).then(r => {
       console.log(r[0].getType("text/plain"))
       let w = ""
       for (let i in r[0].types) {
-        if (r[i].types == "text/html") {
+        if (r[0].types[i] == "text/html") {
           w += await (await r[i].getType("text/html")).text()
           console.log((await r[i].getType("text/html")).text())
         }
