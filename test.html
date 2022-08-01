@@ -9,12 +9,19 @@ body {
   </div>
 </body>
 <script>
-console.log(19)
-navigator.permissions.query({name: "clipboard-read"}).then(() => {
-  navigator.clipboard.read().then(async r => {
-    for (let i in r) {
-      console.log(await (await r[i].getType("text/html")).text())
-    }
-  })
+console.log(20)
+navigator.permissions.query({name: "clipboard-read"}).then(r => {
+  if (r == "granted" || r == "prompt") {
+    navigator.clipboard.read().then(async r => {
+      let w = ""
+      for (let i in r) {
+        w += await (await r[i].getType("text/html")).text()
+      }
+      console.log(w)
+    })
+  }
+  else {
+    alert("クリップボードの読み取りが拒否されました。")
+  }
 })
 </script>
