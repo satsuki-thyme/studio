@@ -9,13 +9,13 @@ body {
   </div>
 </body>
 <script>
-console.log(31)
+console.log(32)
 navigator.permissions.query({name: "clipboard-read"}).then(r => {
   if (r.state == "granted" || r.state == "prompt") {
     navigator.clipboard.read().then(async r => {
       if (r[0].types.indexOf("text/html") > -1) {
         (await r[0].getType("text/html")).text().then(r => {
-          text.innerHTML = r.replace(/<ruby>.*?<\/ruby>/g, "")
+          text.innerHTML = r.replace(/<ruby.*?<\/ruby>/g, "")
         })
       }
     })
