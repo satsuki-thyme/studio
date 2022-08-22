@@ -237,8 +237,6 @@ async function mdParse(src) {
       &&
       arr_status[i + 1]["class"] === "list"
       &&
-      arr_status[i + 1]["listLv"] >= arr_status[i]["listLv"]
-      &&
       (
         arr_status[i - 1]["class"] !== "list"
         ||
@@ -264,7 +262,7 @@ async function mdParse(src) {
       &&
       arr_status[i - 1]["class"] === "list"
       &&
-      arr_status[i - 1]["listLv"] >= arr_status[i]["listLv"]
+      arr_status[i - 1]["listLv"] < arr_status[i]["listLv"]
       &&
       (
         arr_status[i + 1]["class"] !== "list"
@@ -278,6 +276,7 @@ async function mdParse(src) {
         i === len - 1
       )
     ) {
+      console.log(arr_im2[i])
       let w0 = arr_status[i - 1]["listHierarchy"].slice()
       let w1 = ""
       for (let j = 0; j < arr_status[i]["listLv"] - arr_status[i + 1]["listLv"]; j++) {
@@ -294,25 +293,33 @@ async function mdParse(src) {
         arr_status[i - 1]["class"] !== "list"
         &&
         arr_status[i + 1]["class"] !== "list"
-        )
-        ||
-        (
-          i !== 0
-          &&
-          i !== len - 1
-          &&
-          arr_status[i - 1]["class"] === "list"
-          &&
-          arr_status[i - 1]["listLv"] < arr_status[i]["listLv"]
-          &&
-          arr_status[i + 1]["class"] === "list"
-          &&
-          arr_status[i + 1]["listLv"] < arr_status[i]["listLv"]
-        )
-        ||
-        (
-          len - 1 === 0
-        )
+      )
+      ||
+      (
+        i !== 0
+        &&
+        i !== len - 1
+        &&
+        arr_status[i - 1]["class"] === "list"
+        &&
+        arr_status[i - 1]["listLv"] < arr_status[i]["listLv"]
+        &&
+        arr_status[i + 1]["class"] === "list"
+        &&
+        arr_status[i + 1]["listLv"] < arr_status[i]["listLv"]
+      )
+      ||
+      (
+        i !== 0
+        &&
+        i !== len - 1
+        &&
+        arr_status[i + 1]["class"] !== "list"
+      )
+      ||
+      (
+        len - 1 === 0
+      )
     ) {
       if (i !== 0) {
         arr_status[i]["listHierarchy"] = arr_status[i - 1]["listHierarchy"].slice()
