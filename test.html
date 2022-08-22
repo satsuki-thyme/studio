@@ -1,7 +1,13 @@
 <style>
 body {
-  color: #f1eee9;
-  background-color: #1e1f1c;
+  color: #1e1f1c;
+  background-color: #f1eee9;
+}
+@media (prefers-color-scheme: dark) {
+  body {
+    color: #f1eee9;
+    background-color: #1e1f1c;
+  }
 }
 </style>
 <body>
@@ -9,21 +15,18 @@ body {
   </div>
 </body>
 <script>
-console.log(33)
-navigator.permissions.query({name: "clipboard-read"}).then(result => {
-  // クリップボードの読み取りが許可されているか、またはプロンプトによって
-  // ユーザーがそれを許可する場合、処理を続行します。
-
-  if (result.state == "granted" || result.state == "prompt") {
-    navigator.clipboard.read().then(data => {
-      for (let i=0; i<data.entries.length; i++) {
-        if (data.entries[i].type != "text/plain") {
-          alert("クリップボードの内容がテキストでないため、読み込めません。");
-        } else {
-          textElem.innerText = data.items[i].getAs("text/plain");
-        }
-      }
-    });
+let a = 0
+let promise = new Promise(resolve => {
+  for (let i = 0; i < 3; i++) {
+      setTimeout(() => {
+        console.log(0)
+        a += i
+        resolve(a)
+      }, 1000)
   }
-});
+})
+promise
+.then(r => {
+  console.log(r)
+})
 </script>
