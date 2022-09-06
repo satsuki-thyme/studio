@@ -15,18 +15,13 @@ body {
   </div>
 </body>
 <script>
-let a = 0
-let promise = new Promise(resolve => {
-  for (let i = 0; i < 3; i++) {
-      setTimeout(() => {
-        console.log(0)
-        a += i
-        resolve(a)
-      }, 1000)
-  }
-})
-promise
-.then(r => {
-  console.log(r)
-})
+console.log(fun())
+async function fun() {
+  return await new Promise(resolve => {
+    resolve("abc")
+  })
+  .then(r => {
+    return r.replace(/a/g, "1")
+  })
+}
 </script>
