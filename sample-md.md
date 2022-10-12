@@ -107,13 +107,13 @@ https://github.com/ikatyang/emoji-cheat-sheet/blob/master/README.md
 
 脚注 Footnotes 3 [^footnotes-three]
 
-[footnotes-one]: 脚注本文 Footnotes Words 1
+[^footnotes-one]: 脚注本文 Footnotes Words 1
 
-[footnotes-two]: 脚注本文 Footnotes Words 2
+[^footnotes-two]: 脚注本文 Footnotes Words 2
 
-[footnotes-three]: 脚注本文 Footnotes Words 3
+[^footnotes-three]: 脚注本文 Footnotes Words 3
 
-[footnotes-fore]: 脚注本文 Footnotes Words 4
+[^footnotes-fore]: 脚注本文 Footnotes Words 4
 
 <!--非表示 Hiding content with comments-->
 
