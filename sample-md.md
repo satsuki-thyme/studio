@@ -99,13 +99,13 @@ ___太字かつイタリック All bold and italic___
 :絵文字 Emoji:
 https://github.com/ikatyang/emoji-cheat-sheet/blob/master/README.md
 
-脚注 Footnotes 1[^footnotes-1]
+脚注 Footnotes 1 [^footnotes-1]
 
-脚注 Footnotes 1a[^footnotes-1]
+脚注 Footnotes 1a [^footnotes-1]
 
-脚注 Footnotes 2[^footnotes-2]
+脚注 Footnotes 2 [^footnotes-2]
 
-脚注 Footnotes 3[^footnotes-3]
+脚注 Footnotes 3 [^footnotes-3]
 
 [footnotes-1]: 脚注本文 Footnotes Words 1
 
