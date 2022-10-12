@@ -99,21 +99,21 @@ ___太字かつイタリック All bold and italic___
 :絵文字 Emoji:
 https://github.com/ikatyang/emoji-cheat-sheet/blob/master/README.md
 
-脚注 Footnotes 1 [^footnotes-1]
+脚注 Footnotes 1 [^footnotes-one]
 
-脚注 Footnotes 1a [^footnotes-1]
+脚注 Footnotes 1a [^footnotes-one]
 
-脚注 Footnotes 2 [^footnotes-2]
+脚注 Footnotes 2 [^footnotes-two]
 
-脚注 Footnotes 3 [^footnotes-3]
+脚注 Footnotes 3 [^footnotes-three]
 
-[footnotes-1]: 脚注本文 Footnotes Words 1
+[footnotes-one]: 脚注本文 Footnotes Words 1
 
-[footnotes-2]: 脚注本文 Footnotes Words 2
+[footnotes-two]: 脚注本文 Footnotes Words 2
 
-[footnotes-3]: 脚注本文 Footnotes Words 3
+[footnotes-three]: 脚注本文 Footnotes Words 3
 
-[footnotes-4]: 脚注本文 Footnotes Words 4
+[footnotes-fore]: 脚注本文 Footnotes Words 4
 
 <!--非表示 Hiding content with comments-->
 
