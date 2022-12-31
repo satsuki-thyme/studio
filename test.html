@@ -12,16 +12,13 @@ body {
 </style>
 <body>
   <div id="container">
+    <ul>
+      <li><input type="checkbox" checked> aaa</li>
+        <ul>
+          <li><input type="checkbox" checked> bbb</li>
+        </ul>
+      <li><input type="checkbox" checked> ccc</li>
+    </ul>
   </div>
 </body>
-<script>
-console.log(fun())
-async function fun() {
-  return await new Promise(resolve => {
-    resolve("abc")
-  })
-  .then(r => {
-    return r.replace(/a/g, "1")
-  })
-}
-</script>
+
