@@ -61,14 +61,14 @@
 ##### 見出し 5 Headings 5
 ###### 見出し 6 Headings 6
 
-**太字 Bold**
-__太字 Bold__
-*イタリック Italic*
-_イタリック Italic_
-~~取り消し Strikethrough~~
-**太字と_イタリック_の入れ子 Bold and nested _italic_**
-***太字かつイタリック All bold and italic***
-___太字かつイタリック All bold and italic___
+*アスタリスクによるイタリック Italic*  
+_アンダーバーによるイタリック Italic_  
+**アスタリスクによる太字 Bold**  
+__アンダーバーによる太字 Bold__  
+~~取り消し Strikethrough~~  
+**アスタリスクによる太字と_アンダーバーによるイタリック_の入れ子 Bold and nested _italic_**  
+***アスタリスクによる太字かつイタリック All bold and italic***  
+___アンダーバーによる太字かつイタリック All bold and italic___  
 
 > 引用文 Quoting text
 > 引用文 Quoting text
@@ -101,10 +101,7 @@ ___太字かつイタリック All bold and italic___
 
 [リンク Links](.#)
 
-![画像 Images](sample1.png)
-
-:絵文字 Emoji:
-https://github.com/ikatyang/emoji-cheat-sheet/blob/master/README.md
+![画像 Images](sample.jpg)
 
 脚注 Footnotes 2 [^footnotes-two] 脚注 Footnotes 3 [^footnotes-three]
 

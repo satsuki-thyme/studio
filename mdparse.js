@@ -447,16 +447,17 @@ async function mdParse(src) {
   async function markupInline(rly) {
     return rly[0].map(rly => {
       return rly
-      .replace(/(?!_)_(.+)_(?<!_)/g, "<em>$1</em>")
-      .replace(/(?!_)__(.+)__(?<!_)/g, "<strong>$1</strong>")
-      .replace(/___(.+)___/g, "<strong><em>$1</em></strong>")
-      .replace(/(?!\*)\*(.+)\*(?<!\*)/g, "<em>$1</em>")
-      .replace(/(?!\*)\*\*(.+)\*\*(?<!\*)/g, "<strong>$1</strong>")
-      .replace(/\*\*\*(.+)\*\*\*/g, "<strong><em>$1</em></strong>")
-      .replace(/(?!~)~~(.+)~~(?<!~)/g, "<del>$1</del>")
-      .replace(/`(.+)`/g, "<code>$1</code>")
-      .replace(/(?<!!)\[([^\]]+)\]\((.+)\)/g, `<a href="$2">$1</a>`)
-      .replace(/!\[([^\]]+)\]\((.+)\)/g, `<img src="$2" alt="$1">`)
+      .replace(/(?<!_)_([^_].*?)_(?!_)/g, "<em>$1</em>")
+      .replace(/(?<!_)__([^_].*?)__(?!_)/g, "<strong>$1</strong>")
+      .replace(/___(.+?)___/g, "<strong><em>$1</em></strong>")
+      .replace(/(?<!\*)\*([^*].*?)\*(?!\*)/g, "<em>$1</em>")
+      .replace(/(?<!\*)\*\*([^*].*?)\*\*(?!\*)/g, "<strong>$1</strong>")
+      .replace(/\*\*\*(.+?)\*\*\*/g, "<strong><em>$1</em></strong>")
+      .replace(/(?<!~)~~(.+?)~~(?!~)/g, "<del>$1</del>")
+      .replace(/`(.+?)`/g, "<code>$1</code>")
+      .replace(/(?<!!)\[([^\]]+?)\]\((.+?)\)/g, `<a href="$2">$1</a>`)
+      .replace(/!\[([^\]]+?)\]\((.+?)\)/g, `<img src="$2" alt="$1">`)
+      .replace(/\\()/g, "")
     })
   }
   async function procFn(rly) {
